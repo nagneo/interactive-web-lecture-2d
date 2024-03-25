@@ -1,0 +1,227 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #241458;
+}
+
+@keyframes rotation {
+  to {
+    transform: rotateZ(360deg);
+  }
+}
+
+@keyframes shrinkAndGrow {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(0.5);
+  }
+  50% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes colorize {
+  from {
+    fill: #f00;
+  }
+  to {
+    fill: #ff0;
+  }
+}
+
+@keyframes expandHorizontal {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes appearFromBottom {
+  from {
+    transform: translateY(1000px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes shakingUpAndDown {
+  0% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-5px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
+  75% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes aroundEyes {
+  from {
+    transform: scale(0.5);
+    transform: translateY(0);
+    transform: translateX(0);
+  }
+  to {
+    transform: scaleX(1.5);
+    transform: translateY(6px);
+    transform: translateX(6px);
+
+  }
+  
+}
+
+@keyframes soaking {
+  to {
+    transform: translateY(-250px) scale(0);
+  }
+}
+
+@keyframes shrinkHorizontal {
+  to {
+    transform: scaleX(0);
+  }
+}
+
+
+#planet_2 {
+  animation-name: rotation;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  transform-box: fill-box; // 최소한의 공간을 차지하는 박스
+  transform-origin: center; // 도는 중심:
+}
+
+#planet_1 {
+  animation-name: rotation;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+#star_1 {
+  animation-name: shrinkAndGrow;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+#star_6 {
+  animation-name: shrinkAndGrow;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+#star_3 {
+  animation-name: shrinkAndGrow;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+#star_9 {
+  animation-name: shrinkAndGrow;
+  animation-duration: 6s;
+  animation-iteration-count: infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+#star_2 {
+  animation-name: colorize;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-fill-mode: both;
+}
+
+#star_4 {
+  animation-name: colorize;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-fill-mode: both;
+}
+
+#star_7 {
+  animation-name: colorize;
+  animation-duration: 9s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-fill-mode: both;
+}
+
+#star_8 {
+  animation-name: colorize;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-fill-mode: both;
+}
+
+#alien_hand-R, #alien_hand-L {
+  animation-name: shakingUpAndDown;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation-timing-function: cubic-bezier(.35,.28,.82,.87);
+}
+
+#left-eye, #right-eye {
+  animation-name: aroundEyes;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+#UFO-beam {
+  animation: expandHorizontal 3.5s;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+#number-0 {
+  animation: appearFromBottom 3s;
+  animation-timing-function: cubic-bezier(.79,1.31,.82,-0.36);
+}
+
+#number-0-soaking {
+  animation: soaking 2s;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+#UFO-beam-disappearing {
+  animation: shrinkHorizontal 2s;
+  transform-box: fill-box;
+  transform-origin: center;
+}
