@@ -1,3 +1,4 @@
+// cursor를 이동하는 event listener 함수
 document.addEventListener("mousemove", (e) => {
   const cursorDefaultInner = document.querySelector(".cursor__default__inner");
   const cursorTraceInner = document.querySelector(".cursor__trace__inner");
@@ -19,6 +20,7 @@ document.addEventListener("mouseup", () => {
   cursor.classList.remove("cursor--active");
 });
 
+// 물결 요소 만들어서 넣었다가 사라지게 하는 함수
 function createRipple(e) {
   let ripple = document.createElement("span");
 
@@ -34,31 +36,35 @@ function createRipple(e) {
   });
 }
 
+// 클릭할때 ripple 생성
 document.addEventListener("click", (e) => {
   createRipple(e);
 });
 
 const preloaderBtn = document.querySelector(".preloader__btn");
 
-let intervalId = null;
+let scaleUpIntervalId = null;
+let scaleDownIntervalId = null;
 let scale = 1;
 
 const preloaderHideThreshold = 18;
 
 function setPreloaderStyle(scale) {
-  preloaderBtn.style.transform = `scale(${scale})`;
-  document.querySelector(".preloader__btn_hold").style.opacity =
-    1 - (scale - 1) / preloaderHideThreshold;
+  preloaderBtn.style.transform = `translate(-50%, -50%) scale(${scale})`;
+  document.querySelector(".preloader__btn_hold").style.opacity = 1 - (scale - 1) / preloaderHideThreshold;
 }
 
 const header = document.querySelector(".header");
 
 preloaderBtn.addEventListener("mousedown", () => {
-  intervalId = setInterval(() => {
+  clearInterval(scaleDownIntervalId);
+
+  scaleUpIntervalId = setInterval(() => {
     scale += 0.175;
 
     setPreloaderStyle(scale);
 
+    // 일정 크기 이상 커지면 preloader 숨기기
     if (scale >= 1 + preloaderHideThreshold) {
       document.querySelector(".preloader").classList.add("hidden-area");
 
@@ -70,21 +76,21 @@ preloaderBtn.addEventListener("mousedown", () => {
       header.classList.add("shown-area");
       poster.classList.add("shown-area");
 
-      clearInterval(intervalId);
+      clearInterval(scaleUpIntervalId);
     }
+
   }, 10);
 });
 
 preloaderBtn.addEventListener("mouseup", () => {
-  clearInterval(intervalId);
+  clearInterval(scaleUpIntervalId);
 
-  intervalId = setInterval(() => {
+  scaleDownIntervalId = setInterval(() => {
     scale -= 0.075;
-
     setPreloaderStyle(scale);
 
     if (scale <= 1) {
-      clearInterval(intervalId);
+      clearInterval(scaleDownIntervalId);
     }
   }, 10);
 });
@@ -118,6 +124,7 @@ header.addEventListener("mousemove", (e) => {
   }px, ${yRelativeToHeader * 5}px)`;
 });
 
+// IntersectionObserver를 이용해서 이미지가 화면에 보일때 visible 클래스 추가
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
